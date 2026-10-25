@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICC - Inovação em Conformidade Técnica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col">
+
+    <header class="bg-gray-800 border-b border-gray-700 p-4 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-microscope text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wider text-white">SICC</h1>
+                    <p class="text-xs text-gray-400">Sistema de Inteligência em Conformidade Técnica</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="bg-blue-900/50 text-blue-400 border border-blue-700/50 text-xs px-3 py-1 rounded-full font-medium">
+                    <i class="fa-solid fa-code-branch mr-1"></i> Versão Protótipo 1.0 (Roadmap 2026)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-6 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <section class="lg:col-span-5 space-y-6">
+            
+            <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-sm">
+                <div class="flex items-center gap-2 mb-4 text-blue-400 font-semibold">
+                    <i class="fa-solid fa-sliders"></i>
+                    <h2>1. Validação Contextual</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-400 font-medium mb-1">Concessionária / Edital</label>
+                        <select id="concessionaria" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-white">
+                            <option value="CPFL">CPFL Energia</option>
+                            <option value="ENEL">ENEL Distribuição</option>
+                            <option value="Amazonas">Amazonas Energia Distribuição</option>
+                            <option value="EDP">EDP Distribuição</option>
+                            <option value="CEMIG">CEMIG Distribuição</option>
+                            <option value="CELESC">CELESC Distribuição</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 font-medium mb-1">Bitola do Condutor</label>
+                        <select id="bitola" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-white">
+                            <option value="10mm">10 mm²</option>
+                            <option value="16mm">16 mm²</option>
+                            <option value="25mm">25 mm²</option>
+                            <option value="35mm">35 mm²</option>
+                            <option value="50mm">50 mm²</option>
+                            <option value="70mm">70 mm²</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center gap-2 text-blue-400 font-semibold">
+                        <i class="fa-solid fa-keyboard"></i>
+                        <h2>2. Imputação de Valores Brutos</h2>
+                    </div>
+                    <span class="text-[10px] bg-gray-700 px-2 py-1 rounded text-gray-400">Client-side Validation</span>
+                </div>
+                
+                <form id="formEnsaios" class="space-y-4">
+                    <div class="p-3 bg-gray-700/30 rounded-lg border border-gray-700">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium text-gray-200">Absorção de Água</label>
+                            <span class="text-xs text-gray-400 font-mono">NBR 17173-3 / Item 29</span>
+                        </div>
+                        <div class="relative mt-1">
+                            <input type="number" id="absorcao" step="0.1" value="4.5" required
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg pl-3 pr-12 py-2 text-sm focus:outline-none focus:border-blue-500 text-white font-mono">
+                            <span class="absolute right-3 top-2 text-xs text-gray-400">%</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-1"><i class="fa-solid fa-circle-info mr-1"></i>Regra: Se valor > 6.0%  <span class="text-red-400">Rejeitar</span></p>
+                    </div>
+
+                    <div class="p-3 bg-gray-700/30 rounded-lg border border-gray-700">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium text-gray-200">Torque de Ruptura</label>
+                            <span class="text-xs text-gray-400 font-mono">EN 50483-4</span>
+                        </div>
+                        <div class="relative mt-1">
+                            <input type="number" id="torque" step="0.1" value="15.2" required
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg pl-3 pr-12 py-2 text-sm focus:outline-none focus:border-blue-500 text-white font-mono">
+                            <span class="absolute right-3 top-2 text-xs text-gray-400">N·m</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-1"><i class="fa-solid fa-circle-info mr-1"></i>Regra: Se valor < 12.0 N·m <span class="text-red-400">Rejeitar</span></p>
+                    </div>
+
+                    <div class="p-3 bg-gray-700/30 rounded-lg border border-gray-700">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium text-gray-200">Flamabilidade</label>
+                            <span class="text-xs text-gray-400 font-mono">UL 94 / Item 3.3</span>
+                        </div>
+                        <select id="flamabilidade" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-white mt-1">
+                            <option value="HB40">Classe HB40 (Padrão Seguro)</option>
+                            <option value="V-0">Classe V-0 (Alta Resistência)</option>
+                            <option value="ForaEspecificacao">Fora da Especificação HB40</option>
+                        </select>
+                        <p class="text-[11px] text-gray-400 mt-1"><i class="fa-solid fa-circle-info mr-1"></i>Regra: Diferente do HB40 <span class="text-amber-400">Alerta de Segurança</span></p>
+                    </div>
+
+                    <button type="button" onclick="executarMotorRegras()" 
+                        class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-bolt-lightning animate-pulse"></i>
+                        <span>Processar Validação Instantânea</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="lg:col-span-7 space-y-6">
+            
+            <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-sm">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="flex items-center gap-2 text-blue-400 font-semibold">
+                        <i class="fa-solid fa-microchip"></i>
+                        <h2>3. Output do Motor de Regras</h2>
+                    </div>
+                    <span id="tempoProcessamento" class="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-800/30">
+                        Pronto para processar
+                    </span>
+                </div>
+
+                <div id="painelStatus" class="bg-gray-700/50 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-600">
+                    <div>
+                        <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Status Geral do Lote</span>
+                        <div id="statusTexto" class="text-2xl font-black text-gray-300 mt-1">AGUARDANDO INPUT</div>
+                    </div>
+                    <div id="statusBadge" class="h-14 w-14 rounded-full bg-gray-600 flex items-center justify-center text-xl text-white shadow-inner">
+                        <i class="fa-solid fa-hourglass-start"></i>
+                    </div>
+                </div>
+
+                <div id="alertasContainer" class="mt-4 hidden space-y-2">
+                    </div>
+            </div>
+
+            <div id="previewRelatorio" class="bg-white text-gray-900 rounded-xl p-6 shadow-2xl border-t-8 border-gray-800 hidden relative overflow-hidden">
+                
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
+                    <i class="fa-solid fa-file-pdf text-[20rem]"></i>
+                </div>
+
+                <div class="flex justify-between items-start border-b-2 border-gray-200 pb-4 mb-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 tracking-tight">SICC - Relatório de Conformidade</h3>
+                        <p class="text-xs text-gray-500 font-mono" id="relatorioID">ID: --</p>
+                    </div>
+                    <div class="text-right">
+                        <span id="relatorioBadge" class="text-xs font-bold uppercase px-3 py-1 rounded-md">
+                            --
+                        </span>
+                        <p class="text-[10px] text-gray-500 mt-1 font-mono" id="relatorioData">Data: --</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-3 rounded-lg border border-gray-200 mb-4">
+                    <div><span class="font-semibold text-gray-600">Concessionária:</span> <span id="rConcess">--</span></div>
+                    <div><span class="font-semibold text-gray-600">Bitola Validada:</span> <span id="rBitola">--</span></div>
+                    <div><span class="font-semibold text-gray-600">Norma Base:</span> <span class="font-mono text-blue-700">Multi-Normas (SICC Engine)</span></div>
+                    <div><span class="font-semibold text-gray-600">Segurança Jurídica:</span> <span class="text-emerald-700 font-medium"><i class="fa-solid fa-shield-halved"></i> Auditado</span></div>
+                </div>
+
+                <table class="w-full text-left text-xs mb-6 border-collapse">
+                    <thead>
+                        <tr class="bg-gray-800 text-white">
+                            <th class="p-2 rounded-l font-medium">Ensaio Analisado</th>
+                            <th class="p-2 font-medium">Referência Normativa</th>
+                            <th class="p-2 font-medium text-center">Requisito do Edital</th>
+                            <th class="p-2 rounded-r font-medium text-center">Valor Obtido</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 font-medium">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-2 text-gray-800">Absorção de Água</td>
+                            <td class="p-2 text-gray-500 font-mono">NBR 17173-3/Item 29</td>
+                            <td class="p-2 text-center text-gray-600">$\le$ 6,0 %</td>
+                            <td class="p-2 text-center font-bold font-mono" id="tabAbs">--</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-2 text-gray-800">Torque de Ruptura</td>
+                            <td class="p-2 text-gray-500 font-mono">EN 50483-4</td>
+                            <td class="p-2 text-center text-gray-600">$\ge$ 12,0 N·m</td>
+                            <td class="p-2 text-center font-bold font-mono" id="tabTorque">--</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-2 text-gray-800">Flamabilidade</td>
+                            <td class="p-2 text-gray-500 font-mono">UL 94 / Item 33</td>
+                            <td class="p-2 text-center text-gray-600">Igual a HB40</td>
+                            <td class="p-2 text-center font-bold font-mono" id="tabFlam">--</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="flex justify-between items-center border-t border-gray-200 pt-4 text-[11px] text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-signature text-emerald-600 text-base"></i>
+                        <div>
+                            <p class="font-semibold text-gray-700">Assinatura Digital SICC</p>
+                            <p class="text-[9px] font-mono opacity-75 text-gray-400">SHA256: 8f4e2c1a9b8c7d6e5f4a3b2c1d0e9f8a</p>
+                        </div>
+                    </div>
+                    <button onclick="alert('Funcionalidade de download do PDF integrada ao Roadmap FASE 4.')"
+                        class="bg-gray-800 hover:bg-gray-700 text-white font-medium py-1.5 px-3 rounded text-xs transition-colors flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-file-arrow-down"></i> Exportar PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 border-t border-gray-700 p-4 mt-auto">
+        <div class="container mx-auto text-center space-y-3">
+            <div class="bg-gray-900/80 max-w-xl mx-auto p-3 rounded-lg border border-gray-700 flex justify-between items-center">
+                <div class="text-left">
+                    <span class="text-xs text-gray-400 block font-medium">Ganhos de Produtividade SICC</span>
+                    <span class="text-lg font-black text-emerald-400 tracking-tight">95% Redução de Tempo bruto ao relatório</span>
+                </div>
+                <div class="text-right text-xs text-gray-400 max-w-[250px]">
+                    O especialista foca na análise técnica, não na burocracia de tabelas manuais.
+                </div>
+            </div>
+            
+            <p class="text-xs text-gray-500 font-mono">&copy; 2026 SICC VLD-2026 | Inovação em Conformidade Técnica Avançada</p>
+        </div>
+    </footer>
+
+    <script>
+        function executarMotorRegras() {
+            // Inicializar cronômetro de milissegundos para simular o tempo real do motor de regras
+            const t0 = performance.now();
+
+            // Obter Inputs do Usuário
+            const concessionaria = document.getElementById('concessionaria').value;
+            const bitola = document.getElementById('bitola').value;
+            const absorcao = parseFloat(document.getElementById('absorcao').value);
+            const torque = parseFloat(document.getElementById('torque').value);
+            const flamabilidade = document.getElementById('flamabilidade').value;
+
+            // Flags de Validação
+            let loteAprovado = true;
+            let loteRestrito = false;
+            let logsAlertas = [];
+
+            // 1. Regra de Decisão: Absorção de Água
+            let statusAbsorcao = "Aprovado";
+            if (absorcao > 6.0) {
+                loteAprovado = false;
+                statusAbsorcao = "Rejeitado";
+                logsAlertas.push(`<strong>[FALHA DE CRITÉRIO]</strong> Absorção de Água (${absorcao}%) excede o limite normativo de 6.0% estabelecido na NBR 17173-3.`);
+            }
+
+            // 2. Regra de Decisão: Torque de Ruptura
+            let statusTorque = "Aprovado";
+            if (torque < 12.0) {
+                loteAprovado = false;
+                statusTorque = "Rejeitado";
+                logsAlertas.push(`<strong>[FALHA DE CRITÉRIO]</strong> Torque obtido de ${torque} N·m é inferior ao mínimo aceitável de 12.0 N·m (EN 50483-4).`);
+            }
+
+            // 3. Validação Contextual de Segurança: Flamabilidade
+            let statusFlamabilidade = "Aprovado";
+            if (flamabilidade !== "HB40") {
+                loteRestrito = true; // Alerta de segurança restringe sem reprovar imediatamente em alguns editais
+                statusFlamabilidade = "Alerta Segurança";
+                logsAlertas.push(`<strong>[ALERTA DE SEGURANÇA]</strong> Material diverge da Classe HB40 padrão. Verificado risco contextual associado ao edital vigente da ${concessionaria}.`);
+            }
+
+            // Calcular tempo de processamento simulado (em milissegundos)
+            const t1 = performance.now();
+            const tempoCalculado = (t1 - t0).toFixed(4);
+            document.getElementById('tempoProcessamento').innerHTML = `<i class="fa-solid fa-bolt mr-1"></i> Validado em ${tempoCalculado} ms`;
+
+            // Atualizar UI - Status Geral
+            const painelStatus = document.getElementById('painelStatus');
+            const statusTexto = document.getElementById('statusTexto');
+            const statusBadge = document.getElementById('statusBadge');
+            const alertasContainer = document.getElementById('alertasContainer');
+
+            // Resetar container de alertas
+            alertasContainer.innerHTML = '';
+
+            if (!loteAprovado) {
+                statusTexto.innerText = "LOTE REPROVADO";
+                statusTexto.className = "text-2xl font-black text-red-400 mt-1";
+                painelStatus.className = "bg-red-950/30 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-red-900/50";
+                statusBadge.className = "h-14 w-14 rounded-full bg-red-600 flex items-center justify-center text-xl text-white shadow-md animate-bounce";
+                statusBadge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
+            } else if (loteRestrito) {
+                statusTexto.innerText = "LOTE RESTRITO (ALERTA)";
+                statusTexto.className = "text-2xl font-black text-amber-400 mt-1";
+                painelStatus.className = "bg-amber-950/30 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-amber-900/50";
+                statusBadge.className = "h-14 w-14 rounded-full bg-amber-600 flex items-center justify-center text-xl text-white shadow-md";
+                statusBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>`;
+            } else {
+                statusTexto.innerText = "LOTE APROVADO";
+                statusTexto.className = "text-2xl font-black text-emerald-400 mt-1";
+                painelStatus.className = "bg-emerald-950/30 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-emerald-900/50";
+                statusBadge.className = "h-14 w-14 rounded-full bg-emerald-600 flex items-center justify-center text-xl text-white shadow-md";
+                statusBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+            }
+
+            // Injetar Logs de Alertas na Tela
+            if (logsAlertas.length > 0) {
+                alertasContainer.classList.remove('hidden');
+                logsAlertas.forEach(alerta => {
+                    const div = document.createElement('div');
+                    div.className = `p-3 text-xs rounded-lg border flex items-start gap-2 ${
+                        alerta.includes('FALHA') 
+                        ? 'bg-red-900/20 text-red-300 border-red-800/40' 
+                        : 'bg-amber-900/20 text-amber-300 border-amber-800/40'
+                    }`;
+                    div.innerHTML = `<i class="fa-solid fa-circle-exclamation mt-0.5 flex-shrink-0"></i> <span>${alerta}</span>`;
+                    alertasContainer.appendChild(div);
+                });
+            } else {
+                alertasContainer.classList.add('hidden');
+            }
+
+            // --- ATUALIZAR PREVIEW DO RELATÓRIO PDF ---
+            document.getElementById('previewRelatorio').classList.remove('hidden');
+            
+            // Gerar IDs fictícios e metadados datados
+            document.getElementById('relatorioID').innerText = `ID: SICC-${Math.floor(100000 + Math.random() * 900000)}`;
+            document.getElementById('relatorioData').innerText = `Data: ${new Date().toLocaleDateString('pt-BR')}`;
+            document.getElementById('rConcess').innerText = concessionaria;
+            document.getElementById('rBitola').innerText = bitola;
+
+            // Injetar valores na Tabela de Ensaios com estilos condicionais de aprovação
+            const tabAbs = document.getElementById('tabAbs');
+            tabAbs.innerText = `${absorcao.toFixed(1)} %`;
+            tabAbs.className = `p-2 text-center font-bold font-mono ${statusAbsorcao === 'Aprovado' ? 'text-emerald-600' : 'text-red-600'}`;
+
+            const tabTorque = document.getElementById('tabTorque');
+            tabTorque.innerText = `${torque.toFixed(1)} N·m`;
+            tabTorque.className = `p-2 text-center font-bold font-mono ${statusTorque === 'Aprovado' ? 'text-emerald-600' : 'text-red-600'}`;
+
+            const tabFlam = document.getElementById('tabFlam');
+            tabFlam.innerText = flamabilidade === 'HB40' ? 'HB40 (OK)' : (flamabilidade === 'V-0' ? 'V-0 (Aviso)' : 'Inadequado');
+            tabFlam.className = `p-2 text-center font-bold font-mono ${statusFlamabilidade === 'Aprovado' ? 'text-emerald-600' : 'text-amber-600'}`;
+
+            // Emblema do Relatório Técnico
+            const relatorioBadge = document.getElementById('relatorioBadge');
+            if(!loteAprovado) {
+                relatorioBadge.innerText = "Restrito / Reprovado";
+                relatorioBadge.className = "text-xs font-bold uppercase px-3 py-1 rounded-md bg-red-100 text-red-800 border border-red-200";
+            } else if (loteRestrito) {
+                relatorioBadge.innerText = "Aprovado c/ Restrições";
+                relatorioBadge.className = "text-xs font-bold uppercase px-3 py-1 rounded-md bg-amber-100 text-amber-800 border border-amber-200";
+            } else {
+                relatorioBadge.innerText = "Aprovado em Conformidade";
+                relatorioBadge.className = "text-xs font-bold uppercase px-3 py-1 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-200";
+            }
+        }
+    </script>
+</body>
+</html>
